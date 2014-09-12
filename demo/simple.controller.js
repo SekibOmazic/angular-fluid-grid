@@ -4,7 +4,7 @@ angular.module('app')
 
 	$scope.fluidGridOpts = {
 		margins: [20, 20],
-		outerMargin: false,
+		// outerMargin: false,
 		pushing: true,
 		floating: true,
 		draggable: {
@@ -17,7 +17,7 @@ angular.module('app')
 		}
 	};
 
-	// these map directly to gridyItem options
+	// these map directly to fluidGridItem options
 	$scope.standardItems = [{
 		sizeX: 2,
 		sizeY: 1,
