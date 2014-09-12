@@ -1,0 +1,29 @@
+<div ng-controller="SimpleCtrl" class="dashboard">
+
+    <h2>Items</h2>
+
+    <input type="button" ng-click="fluidGridOpts.draggable.enabled = !fluidGridOpts.draggable.enabled" value="{{fluidGridOpts.draggable.enabled ? 'Disable' : 'Enable' }} Draggability" />
+    <input type="button" ng-click="fluidGridOpts.resizable.enabled = !fluidGridOpts.resizable.enabled" value="{{fluidGridOpts.resizable.enabled ? 'Disable' : 'Enable' }} Resizability" />
+
+    Margins:
+    <input type="text" ng-model="fluidGridOpts.margins[0]" size="3" />
+    x
+    <input type="text" ng-model="fluidGridOpts.margins[1]" size="3" />
+
+    <p>
+        Each item provides its own dimensions and position using the standard fields: { row: row, col: col, sizeX: sizeX, sizeY: sizeY }.
+    </p>
+
+    <div fluid-grid="fluidGridOpts">
+        <ul>
+            <li fluid-grid-item="item" ng-repeat="item in standardItems">
+                <input type="text" integer ng-model="item.row" size="1" />,
+                <input type="text" integer ng-model="item.col" size="1" />
+                <br />
+                <input type="text" integer ng-model="item.sizeX" size="1" />x
+                <input type="text" integer ng-model="item.sizeY" size="1" />
+            </li>
+        </ul>
+    </div>
+
+</div>

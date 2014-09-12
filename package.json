@@ -1,0 +1,44 @@
+{
+	"name": "gridy",
+	"version": "0.0.1",
+	"description": "This directive gives you gridy behavior",
+	"license": "MIT",
+	"homepage": "http://SekibOmazic.github.io/gridy",
+	"authors": "https://github.com/SekibOmazic/gridy/graphs/contributors",
+	"devDependencies": {
+		"karma-chrome-launcher": "^0.1.3",
+		"karma-script-launcher": "^0.1.0",
+		"karma-firefox-launcher": "^0.1.3",
+		"karma-jasmine": "^0.2.2",
+		"grunt-bump": "0.0.14",
+		"time-grunt": "^0.3.1",
+		"grunt-contrib-concat": "^0.4.0",
+		"grunt-karma": "^0.8.3",
+		"mocha": "^1.19.0",
+		"karma-mocha": "^0.1.3",
+		"grunt-contrib-uglify": "^0.4.0",
+		"matchdep": "^0.3.0",
+		"grunt-jsbeautifier": "^0.2.7",
+		"grunt-contrib-watch": "^0.6.1",
+		"grunt-contrib-connect": "^0.7.1",
+		"grunt-contrib-jshint": "^0.10.0",
+		"grunt": "^0.4.5",
+		"grunt-protractor-runner": "^0.2.4",
+		"karma-coverage": "^0.2.1",
+		"grunt-contrib-less": "^0.11.0",
+		"karma-phantomjs-launcher": "^0.1.4",
+		"karma": "^0.12.16"
+	},
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"scripts": {
+		"test": "grunt test",
+		"install": "node ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:SekibOmazic/gridy.git"
+	},
+	"main": "dist/gridy.min.js"
+}

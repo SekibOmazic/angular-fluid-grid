@@ -1,0 +1,28 @@
+{
+	"name": "gridy",
+	"version": "0.0.1",
+	"main": "src/fluid-grid.js",
+	"dependencies": {
+		"angular": ">= 1.2.0"
+	},
+	"devDependencies": {
+		"angular-mocks": ">= 1.2.0",
+		"angular-route": ">= 1.2.0",
+		"angular-animate": ">= 1.2.0",
+		"angular-bootstrap": "*",
+		"bootstrap": ">= 3.2"
+	},
+	"ignore": [
+		"test",
+		".bowerrc",
+		".editorconfig",
+		".gitattributes",
+		".gitignore",
+		".jshintrc",
+		".travis.yml",
+		"Gruntfile.js",
+		"karma.conf.js",
+		"ptor.conf.js",
+		"package.json"
+	]
+}
