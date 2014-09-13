@@ -24,5 +24,12 @@
 		"karma.conf.js",
 		"ptor.conf.js",
 		"package.json"
-	]
+	],
+  "authors": [
+    { "name": "Sekib Omazic" }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
+  }
 }
