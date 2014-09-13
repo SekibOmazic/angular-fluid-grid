@@ -1,6 +1,6 @@
 (function(angular) {
 
-	angular.module('app', ['fluidGrid', 'ui.bootstrap', 'ngRoute'])
+	angular.module('app', ['fluidGrid', 'ngRoute'])
 		.config(['$routeProvider',
 			function($routeProvider) {
 				$routeProvider
