@@ -13,6 +13,10 @@
 		"bootstrap": ">= 3.2"
 	},
 	"ignore": [
+    "demo",
+    "index.html",
+    "test.html",
+    "bower.json",
 		"test",
 		".bowerrc",
 		".editorconfig",
