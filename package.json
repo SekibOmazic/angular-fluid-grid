@@ -1,10 +1,10 @@
 {
-	"name": "gridy",
+	"name": "fluid-grid",
 	"version": "0.0.1",
-	"description": "This directive gives you gridy behavior",
+	"description": "This directive gives you fluid grid behavior",
 	"license": "MIT",
-	"homepage": "http://SekibOmazic.github.io/gridy",
-	"authors": "https://github.com/SekibOmazic/gridy/graphs/contributors",
+	"homepage": "http://SekibOmazic.github.io/angular-fluid-grid",
+	"authors": "https://github.com/SekibOmazic/angular-fluid-grid/graphs/contributors",
 	"devDependencies": {
 		"karma-chrome-launcher": "^0.1.3",
 		"karma-script-launcher": "^0.1.0",
@@ -38,7 +38,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:SekibOmazic/gridy.git"
+		"url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
 	},
-	"main": "dist/gridy.min.js"
+	"main": "dist/fluid-grid.min.js"
 }
