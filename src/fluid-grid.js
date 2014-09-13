@@ -1116,8 +1116,8 @@ angular.module('fluidGrid', [])
 
 						function resize(e) {
 
-							item.row = fluidGrid.pixelsToRows(elmY + fluidGrid.margins[0], false);
-							item.col = fluidGrid.pixelsToColumns(elmX + fluidGrid.margins[1], false);
+							item.row = fluidGrid.pixelsToRows(elmY, false);
+							item.col = fluidGrid.pixelsToColumns(elmX, false);
 							item.sizeX = fluidGrid.pixelsToColumns(elmW, true);
 							item.sizeY = fluidGrid.pixelsToRows(elmH, true);
 

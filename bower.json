@@ -25,11 +25,11 @@
 		"ptor.conf.js",
 		"package.json"
 	],
-  "authors": [
-    { "name": "Sekib Omazic" }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
-  }
+	"authors": [{
+		"name": "Sekib Omazic"
+	}],
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
+	}
 }
