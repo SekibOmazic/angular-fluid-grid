@@ -1,5 +1,5 @@
 {
-	"name": "gridy",
+	"name": "fluid-grid",
 	"version": "0.0.1",
 	"main": "src/fluid-grid.js",
 	"dependencies": {
