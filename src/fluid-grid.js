@@ -1,35 +1,7 @@
-'use strict';
+(function(angular) {
+	'use strict';
 
-angular.module('fluidGrid', [])
-
-.constant('fluidGridConfig', {
-	columns: 6, // number of columns in the grid
-	pushing: true, // whether to push other items out of the way
-	floating: true, // whether to automatically float items up so they stack
-	width: 'auto', // the width of the grid. "auto" will expand the grid to its parent container
-	colWidth: 'auto', // the width of the columns. "auto" will divide the width of the grid evenly among the columns
-	rowHeight: 'match', // the height of the rows. "match" will set the row height to be the same as the column width
-	margins: [10, 10], // the margins in between grid items
-	outerMargin: true,
-	isMobile: false, // toggle mobile view
-	minColumns: 1, // the minimum amount of columns the grid can scale down to
-	minRows: 1, // the minimum amount of rows to show if the grid is empty
-	maxRows: 100, // the maximum amount of rows in the grid
-	defaultSizeX: 2, // the default width of a item
-	defaultSizeY: 1, // the default height of a item
-	mobileBreakPoint: 600, // the width threshold to toggle mobile mode
-	resizable: {
-		enabled: true,
-		handles: ['s', 'e', 'n', 'w', 'se', 'ne', 'sw', 'nw']
-	},
-	draggable: {
-		enabled: true
-	}
-})
-
-.controller('FluidGridCtrl', ['fluidGridConfig',
-	function(fluidGridConfig) {
-
+	function FluidGridCtrl(fluidGridConfig) {
 		/**
 		 * Create options from fluidGridConfig constant
 		 */
@@ -436,16 +408,16 @@ angular.module('fluidGrid', [])
 		};
 
 	}
-])
 
-/**
- * The fluidGrid directive
- *
- * @param {object} $parse
- * @param {object} $timeout
- */
-.directive('fluidGrid', ['$timeout', '$rootScope', '$window',
-	function($timeout, $rootScope, $window) {
+	/**
+	 * The fluidGrid directive
+	 *
+	 * @param {object} $timeout
+	 * @param {object} $rootScope
+	 * @param {object} $window
+	 *
+	 */
+	function FluidGrid($timeout, $rootScope, $window) {
 		return {
 			restrict: 'EAC',
 			// without transclude, some child items may lose their parent scope
@@ -457,6 +429,7 @@ angular.module('fluidGrid', [])
 			scope: {
 				config: '=?fluidGrid'
 			},
+
 			compile: function() {
 
 				return function(scope, $elem, attrs, fluidGrid) {
@@ -606,169 +579,168 @@ angular.module('fluidGrid', [])
 			}
 		};
 	}
-])
 
-.controller('FluidGridItemCtrl', function() {
-	this.$element = null;
-	this.fluidGrid = null;
-	this.row = null;
-	this.col = null;
-	this.sizeX = null;
-	this.sizeY = null;
 
-	this.init = function($element, fluidGrid) {
-		this.$element = $element;
-		this.fluidGrid = fluidGrid;
-		this.sizeX = fluidGrid.defaultSizeX;
-		this.sizeY = fluidGrid.defaultSizeY;
-	};
-
-	this.destroy = function() {
-		this.fluidGrid = null;
+	function FluidGridItemCtrl() {
 		this.$element = null;
-	};
+		this.fluidGrid = null;
+		this.row = null;
+		this.col = null;
+		this.sizeX = null;
+		this.sizeY = null;
 
-	/**
-	 * Returns the items most important attributes
-	 */
-	this.toJSON = function() {
-		return {
-			row: this.row,
-			col: this.col,
-			sizeY: this.sizeY,
-			sizeX: this.sizeX
+		this.init = function($element, fluidGrid) {
+			this.$element = $element;
+			this.fluidGrid = fluidGrid;
+			this.sizeX = fluidGrid.defaultSizeX;
+			this.sizeY = fluidGrid.defaultSizeY;
 		};
-	};
 
-	this.isMoving = function() {
-		return this.fluidGrid.movingItem === this;
-	};
+		this.destroy = function() {
+			this.fluidGrid = null;
+			this.$element = null;
+		};
 
-	/**
-	 * Set the items position
-	 *
-	 * @param {number} row
-	 * @param {number} column
-	 */
-	this.setPosition = function(row, column) {
-		this.fluidGrid.putItem(this, row, column);
-		if (this.fluidGrid.loaded) {
-			this.fluidGrid.floatItemsUp();
-		}
+		/**
+		 * Returns the items most important attributes
+		 */
+		this.toJSON = function() {
+			return {
+				row: this.row,
+				col: this.col,
+				sizeY: this.sizeY,
+				sizeX: this.sizeX
+			};
+		};
 
-		this.fluidGrid.updateHeight(this.isMoving() ? this.sizeY : 0);
+		this.isMoving = function() {
+			return this.fluidGrid.movingItem === this;
+		};
 
-		if (!this.isMoving()) {
-			this.setElementPosition();
-		}
-	};
-
-	/**
-	 * Sets a specified size property
-	 *
-	 * @param {string} key Can be either "x" or "y"
-	 * @param {number} value The size amount
-	 */
-	this.setSize = function(key, value) {
-		key = key.toUpperCase();
-		var camelCase = 'size' + key,
-			titleCase = 'Size' + key;
-		if (value === '') {
-			return;
-		}
-		value = parseInt(value, 10);
-		if (isNaN(value) || value === 0) {
-			value = this.fluidGrid['default' + titleCase];
-		}
-		var changed = !(this[camelCase] === value && this['old' + titleCase] && this['old' + titleCase] === value);
-		this['old' + titleCase] = this[camelCase] = value;
-
-		if (!this.isMoving()) {
-			this['setElement' + titleCase]();
-		}
-		if (changed) {
-			this.fluidGrid.moveOverlappingItems(this);
-
+		/**
+		 * Set the items position
+		 *
+		 * @param {number} row
+		 * @param {number} column
+		 */
+		this.setPosition = function(row, column) {
+			this.fluidGrid.putItem(this, row, column);
 			if (this.fluidGrid.loaded) {
 				this.fluidGrid.floatItemsUp();
 			}
 
 			this.fluidGrid.updateHeight(this.isMoving() ? this.sizeY : 0);
-		}
-	};
+
+			if (!this.isMoving()) {
+				this.setElementPosition();
+			}
+		};
+
+		/**
+		 * Sets a specified size property
+		 *
+		 * @param {string} key Can be either "x" or "y"
+		 * @param {number} value The size amount
+		 */
+		this.setSize = function(key, value) {
+			key = key.toUpperCase();
+			var camelCase = 'size' + key,
+				titleCase = 'Size' + key;
+			if (value === '') {
+				return;
+			}
+			value = parseInt(value, 10);
+			if (isNaN(value) || value === 0) {
+				value = this.fluidGrid['default' + titleCase];
+			}
+			var changed = !(this[camelCase] === value && this['old' + titleCase] && this['old' + titleCase] === value);
+			this['old' + titleCase] = this[camelCase] = value;
+
+			if (!this.isMoving()) {
+				this['setElement' + titleCase]();
+			}
+			if (changed) {
+				this.fluidGrid.moveOverlappingItems(this);
+
+				if (this.fluidGrid.loaded) {
+					this.fluidGrid.floatItemsUp();
+				}
+
+				this.fluidGrid.updateHeight(this.isMoving() ? this.sizeY : 0);
+			}
+		};
+
+		/**
+		 * Sets the items sizeY property
+		 *
+		 * @param {number} rows
+		 */
+		this.setSizeY = function(rows) {
+			this.setSize('y', rows);
+		};
+
+		/**
+		 * Sets the items sizeX property
+		 *
+		 * @param {number} rows
+		 */
+		this.setSizeX = function(columns) {
+			this.setSize('x', columns);
+		};
+
+		/**
+		 * Sets an elements position on the page
+		 *
+		 * @param {number} row
+		 * @param {number} column
+		 */
+		this.setElementPosition = function() {
+			if (this.fluidGrid.isMobile) {
+				this.$element.css({
+					margin: this.fluidGrid.margins[0] + 'px',
+					top: 'auto',
+					left: 'auto'
+				});
+			} else {
+				this.$element.css({
+					margin: 0 + 'px',
+					top: (this.row * this.fluidGrid.curRowHeight + (this.fluidGrid.outerMargin ? this.fluidGrid.margins[0] : 0)) + 'px',
+					left: (this.col * this.fluidGrid.curColWidth + (this.fluidGrid.outerMargin ? this.fluidGrid.margins[1] : 0)) + 'px'
+				});
+			}
+		};
+
+		/**
+		 * Sets an elements height
+		 */
+		this.setElementSizeY = function() {
+			if (this.fluidGrid.isMobile) {
+				this.$element.css('height', '');
+			} else {
+				this.$element.css('height', (this.sizeY * this.fluidGrid.curRowHeight - this.fluidGrid.margins[0]) + 'px');
+			}
+		};
+
+		/**
+		 * Sets an elements width
+		 */
+		this.setElementSizeX = function() {
+			if (this.fluidGrid.isMobile) {
+				this.$element.css('width', 'auto');
+			} else {
+				this.$element.css('width', (this.sizeX * this.fluidGrid.curColWidth - this.fluidGrid.margins[1]) + 'px');
+			}
+		};
+	}
 
 	/**
-	 * Sets the items sizeY property
+	 * FluidGridItem directive
 	 *
-	 * @param {number} rows
+	 * @param {object} $parse
+	 * @param {object} $document
+	 * @param {object} $compile
 	 */
-	this.setSizeY = function(rows) {
-		this.setSize('y', rows);
-	};
-
-	/**
-	 * Sets the items sizeX property
-	 *
-	 * @param {number} rows
-	 */
-	this.setSizeX = function(columns) {
-		this.setSize('x', columns);
-	};
-
-	/**
-	 * Sets an elements position on the page
-	 *
-	 * @param {number} row
-	 * @param {number} column
-	 */
-	this.setElementPosition = function() {
-		if (this.fluidGrid.isMobile) {
-			this.$element.css({
-				margin: this.fluidGrid.margins[0] + 'px',
-				top: 'auto',
-				left: 'auto'
-			});
-		} else {
-			this.$element.css({
-				margin: 0 + 'px',
-				top: (this.row * this.fluidGrid.curRowHeight + (this.fluidGrid.outerMargin ? this.fluidGrid.margins[0] : 0)) + 'px',
-				left: (this.col * this.fluidGrid.curColWidth + (this.fluidGrid.outerMargin ? this.fluidGrid.margins[1] : 0)) + 'px'
-			});
-		}
-	};
-
-	/**
-	 * Sets an elements height
-	 */
-	this.setElementSizeY = function() {
-		if (this.fluidGrid.isMobile) {
-			this.$element.css('height', '');
-		} else {
-			this.$element.css('height', (this.sizeY * this.fluidGrid.curRowHeight - this.fluidGrid.margins[0]) + 'px');
-		}
-	};
-
-	/**
-	 * Sets an elements width
-	 */
-	this.setElementSizeX = function() {
-		if (this.fluidGrid.isMobile) {
-			this.$element.css('width', 'auto');
-		} else {
-			this.$element.css('width', (this.sizeX * this.fluidGrid.curColWidth - this.fluidGrid.margins[1]) + 'px');
-		}
-	};
-})
-
-/**
- * GridyItem directive
- *
- * @param {object} $parse
- * @param {object} $controller
- * @param {object} $timeout
- */
-.directive('fluidGridItem', ['$parse', '$compile', '$document',
-	function($parse, $compile, $document) {
+	function FluidGridItem($parse, $document /*, $compile*/ ) {
 		return {
 			restrict: 'EA',
 			controller: 'FluidGridItemCtrl',
@@ -1263,9 +1235,43 @@ angular.module('fluidGrid', [])
 					try {
 						item.destroy();
 					} catch (e) {}
-
 				});
+
 			}
 		};
 	}
-]);
+
+
+	var fluidGridConfig = {
+		columns: 6, // number of columns in the grid
+		pushing: true, // whether to push other items out of the way
+		floating: true, // whether to automatically float items up so they stack
+		width: 'auto', // the width of the grid. "auto" will expand the grid to its parent container
+		colWidth: 'auto', // the width of the columns. "auto" will divide the width of the grid evenly among the columns
+		rowHeight: 'match', // the height of the rows. "match" will set the row height to be the same as the column width
+		margins: [10, 10], // the margins in between grid items
+		outerMargin: true,
+		isMobile: false, // toggle mobile view
+		minColumns: 1, // the minimum amount of columns the grid can scale down to
+		minRows: 1, // the minimum amount of rows to show if the grid is empty
+		maxRows: 100, // the maximum amount of rows in the grid
+		defaultSizeX: 2, // the default width of a item
+		defaultSizeY: 1, // the default height of a item
+		mobileBreakPoint: 600, // the width threshold to toggle mobile mode
+		resizable: {
+			enabled: true,
+			handles: ['s', 'e', 'n', 'w', 'se', 'ne', 'sw', 'nw']
+		},
+		draggable: {
+			enabled: true
+		}
+	};
+
+	angular.module('fluidGrid', [])
+		.constant('fluidGridConfig', fluidGridConfig)
+		.controller('FluidGridCtrl', ['fluidGridConfig', FluidGridCtrl])
+		.directive('fluidGrid', ['$timeout', '$rootScope', '$window', FluidGrid])
+		.controller('FluidGridItemCtrl', FluidGridItemCtrl)
+		.directive('fluidGridItem', ['$parse', '$document', /*'$compile',*/ FluidGridItem]);
+
+})(angular);
