@@ -85,6 +85,7 @@ module.exports = function(grunt) {
 		uglify: {
 			dist: {
 				options: {
+					sourceMap: true,
 					banner: ['/*',
 						' * <%= pkg.name %>',
 						' * <%= pkg.homepage %>',
@@ -99,10 +100,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		copy: {
+			main: {
+				src: 'src/fluid-grid.js',
+				dest: 'dist/fluid-grid.js'
+			}
+		},
 		watch: {
 			dev: {
 				files: ['Gruntfile.js', 'karma.conf.js', 'ptor.conf.js', 'src/*', 'test/**/*.js'],
-				tasks: ['jsbeautifier', 'jshint', 'uglify', 'less', 'karma:unit:run'],
+				tasks: ['jsbeautifier', 'jshint', 'uglify', 'copy', 'less', 'karma:unit:run'],
 				options: {
 					reload: true,
 					livereload: true,
@@ -116,7 +123,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('default', ['jsbeautifier', 'jshint', 'uglify', 'less']);
+	grunt.registerTask('default', ['jsbeautifier', 'jshint', 'uglify', 'copy', 'less']);
 
 	grunt.registerTask('dev', ['connect:dev', 'karma:unit:start', 'watch:dev']);
 	grunt.registerTask('e2e', ['connect:cli', 'protractor', 'watch:e2e']);
