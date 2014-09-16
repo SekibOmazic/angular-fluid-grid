@@ -1,40 +1,42 @@
 {
-	"name": "fluid-grid",
-	"version": "0.3.0",
-	"main": "dist/fluid-grid.js",
-	"dependencies": {
-		"angular": ">= 1.2.0"
-	},
-	"devDependencies": {
-		"angular-mocks": ">= 1.2.0",
-		"angular-route": ">= 1.2.0",
-		"angular-animate": ">= 1.2.0",
-		"angular-bootstrap": "*",
-		"bootstrap": ">= 3.2"
-	},
-	"ignore": [
-		"demo",
-		"index.html",
-		"test.html",
-		"bower.json",
-		"test",
-		"src",
-		".bowerrc",
-		".editorconfig",
-		".gitattributes",
-		".gitignore",
-		".jshintrc",
-		".travis.yml",
-		"Gruntfile.js",
-		"karma.conf.js",
-		"ptor.conf.js",
-		"package.json"
-	],
-	"authors": [{
-		"name": "Sekib Omazic"
-	}],
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
-	}
+  "name": "fluid-grid",
+  "version": "0.3.0",
+  "main": "dist/fluid-grid.js",
+  "dependencies": {
+    "angular": ">= 1.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": ">= 1.2.0",
+    "angular-route": ">= 1.2.0",
+    "angular-animate": ">= 1.2.0",
+    "angular-bootstrap": "*",
+    "bootstrap": ">= 3.2"
+  },
+  "ignore": [
+    "demo",
+    "index.html",
+    "test.html",
+    "bower.json",
+    "test",
+    "src",
+    ".bowerrc",
+    ".editorconfig",
+    ".gitattributes",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "ptor.conf.js",
+    "package.json"
+  ],
+  "authors": [
+    {
+      "name": "Sekib Omazic"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SekibOmazic/angular-fluid-grid.git"
+  }
 }

@@ -1,57 +1,59 @@
 .fluid-grid .fluid-grid-item {
-    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    color: #004756;
-    background: #ffffff;
-    padding: 10px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  color: #004756;
+  background: #ffffff;
+  padding: 10px;
 }
 
 .header {
-    background: #999;
-    cursor: move;
-    margin-bottom: 5px;
+  background: #999;
+  cursor: move;
+  margin-bottom: 5px;
 }
 
 body {
-    padding-top: 50px;
-    font-family: 'Helvetica Neue', arial, sans-serif;
+  padding-top: 50px;
+  font-family: 'Helvetica Neue', arial, sans-serif;
 
-    background-color: #4C141B;
-    color: #BBBBBB;
+  background-color: #4C141B;
+  color: #BBBBBB;
 }
 
 .navbar {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 
 a:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
+
 input {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
-    padding: 4px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  padding: 4px;
 }
+
 .container {
-    margin: auto;
-    max-width: 1000px;
+  margin: auto;
+  max-width: 1000px;
 }
 
 .starter-template {
-    text-align: center;
+  text-align: center;
 }
 
 .navbar-inverse {
-    background-color: #222222;
+  background-color: #222222;
 }
 
 .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    background-color: #222222;
-    border-bottom: 3px solid white;
+  background-color: #222222;
+  border-bottom: 3px solid white;
 }
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-    background-color: #080808;
-    border-bottom: 3px solid #080808;
+  background-color: #080808;
+  border-bottom: 3px solid #080808;
 }
