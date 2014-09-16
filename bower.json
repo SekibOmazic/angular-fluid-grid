@@ -1,7 +1,7 @@
 {
 	"name": "fluid-grid",
 	"version": "0.2.0",
-	"main": "src/fluid-grid.js",
+	"main": "dist/fluid-grid.js",
 	"dependencies": {
 		"angular": ">= 1.2.0"
 	},
@@ -18,7 +18,7 @@
 		"test.html",
 		"bower.json",
 		"test",
-    "src",
+		"src",
 		".bowerrc",
 		".editorconfig",
 		".gitattributes",

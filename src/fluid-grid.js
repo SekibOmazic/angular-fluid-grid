@@ -793,19 +793,19 @@
 					var originalCol, originalRow;
 
 					function mouseDown(e) {
-            // if there is no handle mousedown event will be bound
-            // to the $el so the $el will be moved no mater where 
-            // you click on it. WARNING: This will be a handler
-            // for all children elements so for example you will not have
-            // a focus on input fields.
-            // If you need to interact with children elements you'll need to
-            // have a handle. But in this case you can drag the $el only by
-            // clicking on the handle.
-            if (fluidGrid.draggable.handle) {
-              if (e.currentTarget !== e.target) {
-                return;
-              }
-            }
+						// if there is no handle mousedown event will be bound
+						// to the $el so the $el will be moved no mater where 
+						// you click on it. WARNING: This will be a handler
+						// for all children elements so for example you will not have
+						// a focus on input fields.
+						// If you need to interact with children elements you'll need to
+						// have a handle. But in this case you can drag the $el only by
+						// clicking on the handle.
+						if (fluidGrid.draggable.handle) {
+							if (e.currentTarget !== e.target) {
+								return;
+							}
+						}
 
 						lastMouseX = e.pageX;
 						lastMouseY = e.pageY;
@@ -928,13 +928,13 @@
 						fluidGrid.updateHeight();
 					}
 
-          function getDragHandle() {
-            if (fluidGrid.draggable.handle) {
-              return angular.element($el[0].querySelector(fluidGrid.draggable.handle));
-            }
+					function getDragHandle() {
+						if (fluidGrid.draggable.handle) {
+							return angular.element($el[0].querySelector(fluidGrid.draggable.handle));
+						}
 
-            return $el;
-          }
+						return $el;
+					}
 
 					var dragHandle = getDragHandle();
 
@@ -1238,12 +1238,12 @@
 					}
 				);
 
-        if (fluidGrid.dynamicContent && fluidGrid.dynamicContent.name && options[fluidGrid.dynamicContent.name]) {
-          var content = angular.element($el[0].querySelector(fluidGrid.dynamicContent.selector));
-          content.attr(options[fluidGrid.dynamicContent.name], '');
-          content.attr('item', optionsKey);
-          $compile(content)(scope);
-        }
+				if (fluidGrid.dynamicContent && fluidGrid.dynamicContent.name && options[fluidGrid.dynamicContent.name]) {
+					var content = angular.element($el[0].querySelector(fluidGrid.dynamicContent.selector));
+					content.attr(options[fluidGrid.dynamicContent.name], '');
+					content.attr('item', optionsKey);
+					$compile(content)(scope);
+				}
 
 				return scope.$on('$destroy', function() {
 					try {

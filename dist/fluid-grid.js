@@ -740,7 +740,7 @@
 	 * @param {object} $document
 	 * @param {object} $compile
 	 */
-	function FluidGridItem($parse, $document /*, $compile*/ ) {
+	function FluidGridItem($parse, $document, $compile) {
 		return {
 			restrict: 'EA',
 			controller: 'FluidGridItemCtrl',
@@ -793,8 +793,18 @@
 					var originalCol, originalRow;
 
 					function mouseDown(e) {
-						if (e.currentTarget !== e.target) {
-							return;
+						// if there is no handle mousedown event will be bound
+						// to the $el so the $el will be moved no mater where 
+						// you click on it. WARNING: This will be a handler
+						// for all children elements so for example you will not have
+						// a focus on input fields.
+						// If you need to interact with children elements you'll need to
+						// have a handle. But in this case you can drag the $el only by
+						// clicking on the handle.
+						if (fluidGrid.draggable.handle) {
+							if (e.currentTarget !== e.target) {
+								return;
+							}
 						}
 
 						lastMouseX = e.pageX;
@@ -918,18 +928,19 @@
 						fluidGrid.updateHeight();
 					}
 
-					var dragHandle = $el;
+					function getDragHandle() {
+						if (fluidGrid.draggable.handle) {
+							return angular.element($el[0].querySelector(fluidGrid.draggable.handle));
+						}
+
+						return $el;
+					}
+
+					var dragHandle = getDragHandle();
 
 					if (fluidGrid.draggable.enabled) {
-						if (fluidGrid.draggable.handle) {
-							dragHandle = $el.find(fluidGrid.draggable.handle);
-						}
-
 						dragHandle.bind('mousedown', mouseDown);
 					} else {
-						if (fluidGrid.draggable.handle) {
-							dragHandle = $el.find(fluidGrid.draggable.handle);
-						}
 						dragHandle.unbind('mousedown');
 					}
 
@@ -1227,6 +1238,12 @@
 					}
 				);
 
+				if (fluidGrid.dynamicContent && fluidGrid.dynamicContent.name && options[fluidGrid.dynamicContent.name]) {
+					var content = angular.element($el[0].querySelector(fluidGrid.dynamicContent.selector));
+					content.attr(options[fluidGrid.dynamicContent.name], '');
+					content.attr('item', optionsKey);
+					$compile(content)(scope);
+				}
 
 				return scope.$on('$destroy', function() {
 					try {
@@ -1255,8 +1272,8 @@
 		minColumns: 1, // the minimum amount of columns the grid can scale down to
 		minRows: 1, // the minimum amount of rows to show if the grid is empty
 		maxRows: 100, // the maximum amount of rows in the grid
-		defaultSizeX: 2, // the default width of a item
-		defaultSizeY: 1, // the default height of a item
+		defaultSizeX: 2, // the default width of a fluid-grid item
+		defaultSizeY: 1, // the default height of a fluid-grid item
 		mobileBreakPoint: 600, // the width threshold to toggle mobile mode
 		resizable: {
 			enabled: true,
@@ -1272,6 +1289,6 @@
 		.controller('FluidGridCtrl', ['fluidGridConfig', FluidGridCtrl])
 		.directive('fluidGrid', ['$timeout', '$rootScope', '$window', FluidGrid])
 		.controller('FluidGridItemCtrl', FluidGridItemCtrl)
-		.directive('fluidGridItem', ['$parse', '$document', /*'$compile',*/ FluidGridItem]);
+		.directive('fluidGridItem', ['$parse', '$document', '$compile', FluidGridItem]);
 
 })(angular);

@@ -17,10 +17,10 @@
 				handles: ['se', 'ne', 'sw', 'nw'] // corner handles only
 			},
 
-      dynamicContent: {
-        name: 'type',
-        selector: '.section'
-      }
+			dynamicContent: {
+				name: 'type',
+				selector: '.section'
+			}
 		};
 
 		// these map directly to fluidGridItem options
@@ -29,8 +29,8 @@
 			sizeY: 1,
 			row: 0,
 			col: 0,
-      name: 'Widget 1',
-      type: 'custom'
+			name: 'Widget 1',
+			type: 'custom'
 		}, {
 			sizeX: 2,
 			sizeY: 2,
