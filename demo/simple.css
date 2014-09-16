@@ -7,6 +7,11 @@
     padding: 10px;
 }
 
+.header {
+    background: #999;
+    cursor: move;
+}
+
 body {
     padding-top: 50px;
     font-family: 'Helvetica Neue', arial, sans-serif;

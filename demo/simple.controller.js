@@ -9,13 +9,18 @@
 			pushing: true,
 			floating: true,
 			draggable: {
-				/*handle: 'h3',*/
+				handle: '.header',
 				enabled: false
 			},
 			resizable: {
 				enabled: false,
 				handles: ['se', 'ne', 'sw', 'nw'] // corner handles only
-			}
+			},
+
+      dynamicContent: {
+        name: 'type',
+        selector: '.section'
+      }
 		};
 
 		// these map directly to fluidGridItem options
@@ -23,7 +28,9 @@
 			sizeX: 2,
 			sizeY: 1,
 			row: 0,
-			col: 0
+			col: 0,
+      name: 'Widget 1',
+      type: 'custom'
 		}, {
 			sizeX: 2,
 			sizeY: 2,
