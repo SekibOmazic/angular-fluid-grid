@@ -109,7 +109,7 @@ module.exports = function(grunt) {
 		watch: {
 			dev: {
 				files: ['Gruntfile.js', 'karma.conf.js', 'ptor.conf.js', 'src/*', 'test/**/*.js'],
-				tasks: ['jsbeautifier', 'jshint', 'uglify', 'copy', 'less', 'karma:unit:run'],
+				tasks: ['jshint', 'uglify', 'copy', 'less', 'karma:unit:run'],
 				options: {
 					reload: true,
 					livereload: true,
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 			},
 			e2e: { // separate e2e so livereload doesn't have to wait for e2e tests
 				files: ['src/*', 'test/**/*.js'],
-				tasks: ['jsbeautifier', 'jshint', 'uglify', 'protractor']
+				tasks: ['jshint', 'uglify', 'protractor']
 			}
 		}
 	});
