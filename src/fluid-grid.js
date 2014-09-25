@@ -520,10 +520,10 @@
 
           scope.$watch('fluidGrid.gridHeight', updateHeight);
 
-          var prevWidth = parseFloat($elem.css('width')) || $elem.prop('offsetWidth');
+          var prevWidth = parseInt($elem.css('width')) || $elem.prop('offsetWidth');
 
           function resize() {
-            var width = parseFloat($elem.css('width')) || $elem.prop('offsetWidth');
+            var width = parseInt($elem.css('width')) || $elem.prop('offsetWidth');
 
             if (width === prevWidth || fluidGrid.movingItem) {
               return;
@@ -557,7 +557,7 @@
           $win.on('resize', onResize);
 
           scope.$watch(function () {
-            var _width = parseFloat($elem.css('width')) || $elem.prop('offsetWidth');
+            var _width = parseInt($elem.css('width')) || $elem.prop('offsetWidth');
             return _width;
           }, resize);
 
