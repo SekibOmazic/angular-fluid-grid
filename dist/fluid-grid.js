@@ -774,6 +774,18 @@
         $el.addClass('fluid-grid-item');
 
 
+        function getDragHandle() {
+          if (fluidGrid.draggable.handle) {
+            return angular.element($el[0].querySelector(fluidGrid.draggable.handle));
+          }
+
+          return $el;
+        }
+        
+        function getResizeHandles() {
+          return $el[0].querySelectorAll('.fluid-grid-item-resizable-handler');
+        }
+
         function setDraggable() {
           var elmX, elmY, elmW, elmH,
 
@@ -925,14 +937,6 @@
 
             item.setPosition(item.row, item.col);
             fluidGrid.updateHeight();
-          }
-
-          function getDragHandle() {
-            if (fluidGrid.draggable.handle) {
-              return angular.element($el[0].querySelector(fluidGrid.draggable.handle));
-            }
-
-            return $el;
           }
 
           var dragHandle = getDragHandle();
@@ -1247,9 +1251,23 @@
 
         return scope.$on('$destroy', function () {
           try {
+            // get all resize handles (children of this $el)
+            var domEl = getResizeHandles();
+            if (domEl.length) {
+              for (var i = 0, j = domEl.length; i < j; i++) {
+                angular.element(domEl[i]).unbind();
+              }
+
+              angular.element(domEl).remove();
+            }
+
+            // unbind drag handler
+            getDragHandle().unbind();
+
             fluidGrid.removeItem(item);
           } catch (e) {
           }
+
           try {
             item.destroy();
           } catch (e) {
