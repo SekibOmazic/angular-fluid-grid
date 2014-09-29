@@ -467,7 +467,7 @@
 
             // resolve "auto" & "match" values
             if (fluidGrid.width === 'auto') {
-              fluidGrid.curWidth = parseInt($elem.css('width')) || parseInt($elem.prop('offsetWidth'));
+              fluidGrid.curWidth = parseInt($elem.css('width')) || $elem.prop('offsetWidth');
             } else {
               fluidGrid.curWidth = fluidGrid.width;
             }
